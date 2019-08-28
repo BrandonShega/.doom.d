@@ -6,9 +6,9 @@
       user-mail-address "b.shega@gmail.com"
       epa-file-encrypt-to user-mail-address
 
-      company-idle-delay 0.3
+      company-idle-delay 0.2
       doom-font (font-spec :family "Monaco" :size 12)
-      doom-theme 'doom-dracula
+      doom-theme 'doom-nova
       display-line-numbers-type 'relative
       doom-themes-treemacs-theme "doom-colors"
       org-directory "~/Dropbox/Organization")
@@ -16,8 +16,7 @@
 (when IS-MAC
   (setq ns-use-thin-smoothing t))
 
-(map! :m "M-j" #'multi-next-line
-      :m "M-k" #'multi-previous-line
+(map! :leader "`" #'evil-switch-to-windows-last-buffer
 
       ;; Easier window movement
       :n "C-h" #'evil-window-left
