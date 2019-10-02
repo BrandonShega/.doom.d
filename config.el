@@ -8,7 +8,7 @@
 
       company-idle-delay 0.2
       doom-font (font-spec :family "Monaco" :size 12)
-      doom-theme 'doom-nova
+      doom-theme 'doom-gruvbox
       display-line-numbers-type 'relative
       doom-themes-treemacs-theme "doom-colors"
       org-directory "~/Dropbox/Organization")
@@ -16,7 +16,9 @@
 (when IS-MAC
   (setq ns-use-thin-smoothing t))
 
-(map! :leader "`" #'evil-switch-to-windows-last-buffer
+(map! :leader "`" #'evil-switch-to-windows-last-buffer)
+
+(map!
 
       ;; Easier window movement
       :n "C-h" #'evil-window-left
@@ -37,11 +39,6 @@
 
 (after! typescript-mode
   (setq typescript-indent-level 2))
-
-(after! emmet-mode
-  (map! :map emmet-mode-keymap
-        :v [tab] #'emmet-wrap-with-markup
-        :i [tab] #'+web/indent-or-yas-or-emmet-expand))
 
 (after! web-mode
   (setq web-mode-markup-indent-offset 2
