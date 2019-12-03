@@ -14,12 +14,13 @@
       org-directory "~/Dropbox/Organization")
 
 (when IS-MAC
-  (setq ns-use-thin-smoothing t))
+  (setq ns-use-thin-smoothing t
+        mac-command-modifier 'meta
+        mac-option-modifier 'super))
 
 (map! :leader "`" #'evil-switch-to-windows-last-buffer)
 
 (map!
-
       ;; Easier window movement
       :n "C-h" #'evil-window-left
       :n "C-j" #'evil-window-down
@@ -37,9 +38,13 @@
         "C-h" #'evil-window-left
         "C-l" #'evil-window-right))
 
-(after! typescript-mode
-  (setq typescript-indent-level 2))
+(setq +workspaces-switch-project-function #'ignore)
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
 
-(after! web-mode
-  (setq web-mode-markup-indent-offset 2
-        web-mode-code-indent-offset 2))
+(after! forge
+  (push '("git.moen.com" "git.moen.com/api/v3"
+          "git.moen.com" forge-github-repository)
+        forge-alist))
+
+(fset 'battery-update #'ignore)
