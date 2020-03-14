@@ -4,7 +4,7 @@
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 12))
 
-(setq doom-theme 'doom-gruvbox
+(setq doom-theme 'doom-snazzy
       doom-themes-treemacs-theme "doom-colors")
 
 (map! :leader "`" #'evil-switch-to-windows-last-buffer)
@@ -184,6 +184,8 @@
       org-outline-path-complete-in-steps nil
       org-refile-allow-creating-parent-nodes 'confirm)
 
+(setq jiralib-url "https://gpgdigital.atlassian.net/")
+
 (after! forge
   (push '("git.moen.com" "git.moen.com/api/v3"
           "git.moen.com" forge-github-repository)
@@ -194,6 +196,11 @@
 (let ((credential (auth-source-user-and-password "api.github.com")))
   (setq grip-github-user (car credential)
         grip-github-password (cadr credential)))
+
+(after! lsp-ui
+    (add-hook 'lsp-after-initialize-hook (lambda
+                                        ()
+                                        (flycheck-add-next-checker 'lsp-ui 'typescript-tslint))))
 
 (setq lsp-clients-angular-language-server-command
       '("node"
@@ -216,4 +223,5 @@
   :config
   (setq org-plantuml-jar-path (expand-file-name "~/Dropbox/opt/plantuml.jar")))
 
-(fset 'battery-update #'ignore)
+(after! gcmh
+  (setq gcmh-high-cons-threshold 8388608))
