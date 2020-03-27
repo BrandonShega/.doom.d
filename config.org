@@ -287,10 +287,12 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
 * LSP Settings
 ** General
 #+BEGIN_SRC emacs-lisp
-(after! lsp-ui
-    (add-hook 'lsp-after-initialize-hook (lambda
-                                        ()
-                                        (flycheck-add-next-checker 'lsp-ui 'typescript-tslint))))
+;; (setq lsp-eslint-server-command
+  ;;     '("node"
+    ;;     "/Users/bshega/.vscode-insiders/extensions/dbaeumer.vscode-eslint-2.1.1/server/out/eslintServer.js"
+      ;;   "--stdio"))
+(after! flycheck
+  (flycheck-add-next-checker 'lsp 'javascript-eslint t))
 #+END_SRC
 ** Angular LSP
 #+BEGIN_SRC emacs-lisp

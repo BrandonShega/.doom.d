@@ -197,10 +197,12 @@
   (setq grip-github-user (car credential)
         grip-github-password (cadr credential)))
 
-(after! lsp-ui
-    (add-hook 'lsp-after-initialize-hook (lambda
-                                        ()
-                                        (flycheck-add-next-checker 'lsp-ui 'typescript-tslint))))
+;; (setq lsp-eslint-server-command
+  ;;     '("node"
+    ;;     "/Users/bshega/.vscode-insiders/extensions/dbaeumer.vscode-eslint-2.1.1/server/out/eslintServer.js"
+      ;;   "--stdio"))
+(after! flycheck
+  (flycheck-add-next-checker 'lsp 'javascript-eslint t))
 
 (setq lsp-clients-angular-language-server-command
       '("node"
