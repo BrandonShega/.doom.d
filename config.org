@@ -26,7 +26,7 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
 
 ** Theme
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-snazzy
+(setq doom-theme 'doom-dracula
       doom-themes-treemacs-theme "doom-colors")
 #+END_SRC
 
@@ -80,6 +80,15 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
 (after! org (set-popup-rule! "*org agenda*" :side 'right :size .40 :select t :vslot 2 :ttl 3))
 #+END_SRC
 
+* Languages
+** Prettier
+#+BEGIN_SRC emacs-lisp
+(use-package! prettier-js
+  :hook
+  (js2-mode . prettier-js-mode)
+  (typescript-mode . prettier-js-mode)
+  (web-mode-hook . prettier-js-mode))
+#+END_SRC
 * Org Mode Settings
 ** Agenda
 #+BEGIN_SRC emacs-lisp
@@ -287,12 +296,8 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
 * LSP Settings
 ** General
 #+BEGIN_SRC emacs-lisp
-;; (setq lsp-eslint-server-command
-  ;;     '("node"
-    ;;     "/Users/bshega/.vscode-insiders/extensions/dbaeumer.vscode-eslint-2.1.1/server/out/eslintServer.js"
-      ;;   "--stdio"))
-(after! flycheck
-  (flycheck-add-next-checker 'lsp 'javascript-eslint t))
+(add-hook 'lsp-after-initialize-hook (lambda ()
+                                       (flycheck-add-next-checker 'lsp 'javascript-tslint)))
 #+END_SRC
 ** Angular LSP
 #+BEGIN_SRC emacs-lisp
