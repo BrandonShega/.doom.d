@@ -89,6 +89,12 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
   (typescript-mode . prettier-js-mode)
   (web-mode-hook . prettier-js-mode))
 #+END_SRC
+** TSLint fix
+#+BEGIN_SRC emacs-lisp
+(after! flycheck
+  (setcar (memq 'source-inplace (flycheck-checker-get 'typescript-tslint 'command))
+          'source-original))
+#+END_SRC
 * Org Mode Settings
 ** Agenda
 #+BEGIN_SRC emacs-lisp
@@ -291,24 +297,6 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
 (let ((credential (auth-source-user-and-password "api.github.com")))
   (setq grip-github-user (car credential)
         grip-github-password (cadr credential)))
-#+END_SRC
-
-* LSP Settings
-** General
-#+BEGIN_SRC emacs-lisp
-(add-hook 'lsp-after-initialize-hook (lambda ()
-                                       (flycheck-add-next-checker 'lsp 'javascript-tslint)))
-#+END_SRC
-** Angular LSP
-#+BEGIN_SRC emacs-lisp
-(setq lsp-clients-angular-language-server-command
-      '("node"
-        "/usr/lib/node_modules/@angular/language-server"
-        "--ngProbeLocations"
-        "/usr/lib/node_modules"
-        "--tsProbeLocations"
-        "/usr/lib/node_modules"
-        "--stdio"))
 #+END_SRC
 
 * Extra Plugins
