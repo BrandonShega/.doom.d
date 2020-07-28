@@ -95,6 +95,12 @@ The font I use is JetBrains' Mono which can be downloaded [[https://www.jetbrain
   (setcar (memq 'source-inplace (flycheck-checker-get 'typescript-tslint 'command))
           'source-original))
 #+END_SRC
+
+** Swift
+#+BEGIN_SRC emacs-lisp
+(after! lsp-mode
+  (setq lsp-sourcekit-executable "/opt/swift/usr/bin/sourcekit-lsp"))
+#+END_SRC
 * Org Mode Settings
 ** Agenda
 #+BEGIN_SRC emacs-lisp
